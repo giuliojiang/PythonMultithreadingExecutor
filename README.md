@@ -31,3 +31,19 @@ class MyF (object):
 5 - call mtexecutor.map_async(theFunction, data, ncpus), where theFunction is the instance of the function class you want to apply, data is a list of data to be processed, and ncpus is the number of threads to be instantiated.
 
 An example of usage is found in https://github.com/giuliojiang/PythonMultithreadingExecutor/blob/master/test.py
+
+# Implementation
+
+The list of data is used to construct a queue of jobs. A number of threads equal to the specified number of cpus is created.
+
+Each thread will retrieve jobs from the head of the queue and apply the function asynchronously. Once the queue is empty, the thread joins and map returns.
+
+# Shared objects
+
+A major advantage of MultiThreadedExecutor over the multiprocessing module is the possibility to easily share data among threads. A simple way to share an object, is to have each data element in the jobs list to be a tuple, with all the tuples sharing an object.
+
+Explicit locks can be obtained with
+```
+mtexecutor.get_new_lock():
+```
+to control the access to the shared object(s)
