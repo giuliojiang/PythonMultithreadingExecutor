@@ -44,7 +44,7 @@ A major advantage of MultiThreadedExecutor over the multiprocessing module is th
 
 Explicit locks can be obtained with
 ```
-alock = mtexecutor.get_new_lock():
+alock = mtexecutor.get_new_lock()
 ```
 to control the access to the shared object(s)
 ```
